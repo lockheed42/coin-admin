@@ -1,12 +1,14 @@
 <?php
 namespace Home\Controller;
 
-use Think\Controller;
+use Home\Common\CommonController;
 
-class IndexController extends Controller
+class IndexController extends CommonController
 {
     public function index()
     {
-        echo 4546;
+        $this->checkLogin();
+
+        $this->display();
     }
 }
