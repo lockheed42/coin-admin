@@ -30,6 +30,7 @@ class CommonController extends Controller
 
         $this->_admin_id = $info['admin_id'];
         $this->assign('admin_id', $this->_admin_id);
+        $this->assign('admin_name', $info['name']);
     }
 
     /**
@@ -37,7 +38,10 @@ class CommonController extends Controller
      */
     public function getLoginInfo()
     {
-        return ['admin_id' => 22222];
+        return [
+            'admin_id' => 1,
+            'name'     => '超级管理员',
+        ];
         $apiKey = I('get.api_key');
         $apiSecurity = I('get.api_security');
 
