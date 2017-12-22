@@ -1,4 +1,5 @@
 <?php
+
 namespace Home\Controller;
 
 use Home\Common\CommonController;

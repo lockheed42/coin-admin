@@ -23,28 +23,45 @@ class CommonController extends Controller
      */
     protected function checkLogin()
     {
-        $info = $this->getLoginInfo();
+        $info = $this->getPassport();
         if (empty($info)) {
-            throw new \Exception('用户未登录');
+            redirect('?c=login&a=login');
         }
 
         $this->_admin_id = $info['admin_id'];
-        $this->assign('admin_id', $this->_admin_id);
+        $this->assign('admin_id', $info['admin_id']);
         $this->assign('admin_name', $info['name']);
     }
 
     /**
-     * 根据key 和 security 获取用户信息
+     * 清除passport
      */
-    public function getLoginInfo()
+    public function delPassport()
     {
-        return [
-            'admin_id' => 1,
-            'name'     => '超级管理员',
-        ];
-        $apiKey = I('get.api_key');
-        $apiSecurity = I('get.api_security');
+        cookie('passport', null);
+    }
 
-        return M('admin')->where(['api_key' => $apiKey, 'api_security' => $apiSecurity])->find();
+    /**
+     * 获取passport。失败跳转到登录界面，成功返回admin信息
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getPassport()
+    {
+        $passport = cookie('passport');
+        return M('admin')->where(['passport' => $passport])->find();
+    }
+
+    /**
+     * 设置passport，并保存在cookie内
+     *
+     * @param $admin
+     */
+    public function setPassport($admin)
+    {
+        $passport = md5($admin['admin_id'] . $admin['pwd']);
+        cookie('passport', $passport, 86400);
+        M('admin')->where(['admin_id' => $admin['admin_id']])->save(['passport' => $passport]);
     }
 }

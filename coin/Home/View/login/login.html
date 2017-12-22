@@ -13,7 +13,7 @@
 						<a href="#"><i class="halflings-icon cog"></i></a>
 					</div>
 					<h2>Login to your account</h2>
-					<form class="form-horizontal" action="?c=index&a=index" method="post">
+					<form class="form-horizontal" action="?c=login&a=login" method="post">
 						<fieldset>
 							
 							<div class="input-prepend" title="Username">
@@ -57,5 +57,8 @@
 		</div>
 
 		<include file="./Public/html/foot.js.html" />
+<if condition="$alert == 1">
+	{$error}
+</if>
 </body>
 </html>
