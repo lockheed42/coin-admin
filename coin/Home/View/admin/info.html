@@ -23,7 +23,7 @@
 			<ul class="breadcrumb">
 				<li>
 					<i class="icon-home"></i>
-					<a href="../user/index.html">Home</a>
+					<a href="?c=index&a=index">Home</a>
 					<i class="icon-angle-right"></i> 
 				</li>
 				<li>
@@ -41,7 +41,7 @@
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal">
+						<form class="form-horizontal" action="?c=admin&a=save" method="post">
 						  <fieldset>
 							  <div class="control-group">
 								  <label class="control-label">名称</label>
@@ -56,6 +56,10 @@
 								  </div>
 							  </div>
 
+							  <div class="form-actions">
+								  <button type="submit" class="btn btn-primary">Save changes</button>
+								  <button type="reset" class="btn">Cancel</button>
+							  </div>
 						  </fieldset>
 						</form>   
 

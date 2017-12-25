@@ -12,6 +12,9 @@ use Home\Common\CommonController;
 
 class AdminController extends CommonController
 {
+    /**
+     * 管理员个人资料
+     */
     public function info()
     {
         $this->checkLogin();
@@ -19,13 +22,16 @@ class AdminController extends CommonController
         $this->display();
     }
 
+    /**
+     * 保存信息
+     */
     public function save()
     {
         try {
-            $pwd = I('post.pwd');
             $this->checkLogin();
+            $pwd = I('post.pwd');
 
-            M('admin')->where(['admin_id' => $this->_admin_id])->save(['pwd2' => md5($pwd)]);
+            M('admin')->where(['admin_id' => $this->_admin_id])->save(['pwd' => md5($pwd)]);
 
             redirect('?c=index&a=index');
         } catch (\Exception $e) {

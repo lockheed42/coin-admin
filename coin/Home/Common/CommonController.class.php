@@ -64,4 +64,24 @@ class CommonController extends Controller
         cookie('passport', $passport, 86400);
         M('admin')->where(['admin_id' => $admin['admin_id']])->save(['passport' => $passport]);
     }
+
+    /**
+     * 记录txt日志。
+     *
+     * @param string $file 文件名。不需要带后缀
+     * @param string $content 文件内容
+     * @param bool $isNeedDate 是否在文件名追加日期，默认否
+     */
+    public function log($file, $content, $isNeedDate = false)
+    {
+        $filePath = ROOT_PATH . '/logs/' . $file;
+        if ($isNeedDate === true) {
+            $filePath .= date('Ymd');
+        }
+        $filePath .= '.txt';
+
+        $content = date('Y-m-d H:i:s') . ' ' . $content . PHP_EOL;
+
+        file_put_contents($filePath, $content, FILE_APPEND);
+    }
 }

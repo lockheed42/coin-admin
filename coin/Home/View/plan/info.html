@@ -1,0 +1,157 @@
+<include file="./Public/html/header.html" />
+<body>
+<!-- start: Header -->
+<include file="./Public/html/top.html" />
+<div class="container-fluid-full">
+
+		<div class="container-fluid-full">
+		<div class="row-fluid">
+
+			<include file="./Public/html/menu.html" />
+			
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<!-- start: Content -->
+			<div id="content" class="span10">
+			
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="?c=index&a=index">Home</a>
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>
+					<i class="icon-reorder"></i>
+					<a href="?c=plan&a=index">计划列表</a>
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>
+					<i class="icon-edit"></i>
+					<a href="#">发行计划资料</a>
+				</li>
+			</ul>
+			
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon white edit"></i><span class="break"></span>Form Elements</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" action="?c=admin&a=save" method="post">
+						  <fieldset>
+							  <div class="control-group">
+								  <label class="control-label">名称</label>
+								  <div class="controls">
+									  <span class="input-xlarge uneditable-input">{$plan.name}</span>
+								  </div>
+							  </div>
+							  <div class="control-group">
+								  <label class="control-label">内容</label>
+								  <div class="controls">
+									  <span class="input-xlarge uneditable-input">{$plan.content}</span>
+								  </div>
+							  </div>
+							  <div class="control-group">
+								  <label class="control-label">发行额度</label>
+								  <div class="controls">
+									  <span class="input-xlarge uneditable-input">{$plan.total}</span>
+								  </div>
+							  </div>
+							  <div class="control-group">
+								  <label class="control-label">已售额度</label>
+								  <div class="controls">
+									  <span class="input-xlarge uneditable-input">{$plan.sell}</span>
+								  </div>
+							  </div>
+							  <div class="control-group">
+								  <label class="control-label">发行时算力单价（ RMB）</label>
+								  <div class="controls">
+									  <span class="input-xlarge uneditable-input">{$plan.price}</span>
+								  </div>
+							  </div>
+							  <div class="control-group">
+								  <label class="control-label">起始日期</label>
+								  <div class="controls">
+									  <span class="input-xlarge uneditable-input">{$plan.begin}</span>
+								  </div>
+							  </div>
+							  <div class="control-group">
+								  <label class="control-label">结束日期</label>
+								  <div class="controls">
+									  <span class="input-xlarge uneditable-input">{$plan.end}</span>
+								  </div>
+							  </div>
+							  <div class="control-group">
+								  <label class="control-label">算力供应商：</label>
+								  <div class="controls">
+								  </div>
+							  </div>
+
+							  <foreach name="suppliers" item="item">
+								  <div class="control-group">
+									  <label class="control-label">供应商名称</label>
+									  <div class="controls">
+										  <span class="input-xlarge uneditable-input">{$item.supplier}</span>
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label">提供的算力</label>
+									  <div class="controls">
+										  <span class="input-xlarge uneditable-input">{$item.quota}</span>
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label"></label>
+									  <div class="controls">
+									  </div>
+								  </div>
+							  </foreach>
+
+							  <!--<div class="form-actions">-->
+								  <!--<button type="submit" class="btn btn-primary">Save changes</button>-->
+								  <!--<button type="reset" class="btn">Cancel</button>-->
+							  <!--</div>-->
+						  </fieldset>
+						</form>   
+
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+
+
+	</div><!--/.fluid-container-->
+	
+			<!-- end: Content -->
+		</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+
+		<include file="./Public/html/footer.html" />
+		<include file="./Public/html/foot.js.html" />
+</body>
+</html>
