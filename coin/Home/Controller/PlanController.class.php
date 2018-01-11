@@ -84,14 +84,18 @@ class PlanController extends CommonController
      */
     public function autoBegin()
     {
-        $time = time();
+        try {
+            $time = time();
 
-        $planList = M('plan')->where(['status' => self::STATUS_FOR_SELL])->select();
-        foreach ($planList as $plan) {
-            if (strtotime($plan['begin']) <= $time) {
-                M('plan')->where(['plan_id' => $plan['plan_id']])->save(['status' => self::STATUS_RUNNING]);
-                $this->log('auto_begin', "计划id: ${plan['plan_id']} 设置为进行中");
+            $planList = M('plan')->where(['status' => self::STATUS_FOR_SELL])->select();
+            foreach ($planList as $plan) {
+                if (strtotime($plan['begin']) <= $time) {
+                    M('plan')->where(['plan_id' => $plan['plan_id']])->save(['status' => self::STATUS_RUNNING]);
+                    $this->log('auto_plan', "计划id: ${plan['plan_id']} 设置为进行中");
+                }
             }
+        } catch (\Exception $e) {
+            $this->log('error', $e);
         }
     }
 
@@ -100,14 +104,18 @@ class PlanController extends CommonController
      */
     public function autoEnd()
     {
-        $time = time();
+        try {
+            $time = time();
 
-        $planList = M('plan')->where(['status' => self::STATUS_RUNNING])->select();
-        foreach ($planList as $plan) {
-            if (strtotime($plan['end']) <= $time) {
-                M('plan')->where(['plan_id' => $plan['plan_id']])->save(['status' => self::STATUS_CLOSED]);
-                $this->log('auto_begin', "计划id: ${plan['plan_id']} 设置为关闭");
+            $planList = M('plan')->where(['status' => self::STATUS_RUNNING])->select();
+            foreach ($planList as $plan) {
+                if (strtotime($plan['end']) <= $time) {
+                    M('plan')->where(['plan_id' => $plan['plan_id']])->save(['status' => self::STATUS_CLOSED]);
+                    $this->log('auto_plan', "计划id: ${plan['plan_id']} 设置为关闭");
+                }
             }
+        } catch (\Exception $e) {
+            $this->log('error', $e);
         }
     }
 }

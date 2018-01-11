@@ -8,9 +8,9 @@
 
 namespace Home\Controller;
 
-use Think\Controller;
+use Home\Common\CommonController;
 
-class TestController extends Controller
+class TestController extends CommonController
 {
     public function abc($id)
     {

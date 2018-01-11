@@ -29,6 +29,7 @@ class CashController extends CommonController
             $outList[$userId]['cash'] = $cash;
             $outList[$userId]['user_id'] = $userId;
             $outList[$userId]['bank_name'] = $bankAccount['bank_name'];
+            $outList[$userId]['reg_bank'] = $bankAccount['reg_bank'];
             $outList[$userId]['user_name'] = $bankAccount['user_name'];
             $outList[$userId]['code'] = $bankAccount['code'];
             $outList[$userId]['date'] = $oneWeek;
