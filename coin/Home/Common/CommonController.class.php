@@ -31,6 +31,7 @@ class CommonController extends Controller
         $this->_admin_id = $info['admin_id'];
         $this->assign('admin_id', $info['admin_id']);
         $this->assign('admin_name', $info['name']);
+        $this->assign('role_id', $info['role_id']);
     }
 
     /**

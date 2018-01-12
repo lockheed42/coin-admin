@@ -66,6 +66,8 @@ class CashController extends CommonController
                     throw new Exception('打款金额为0');
                 }
 
+                $userInfo = M('user')->where(['user_id' => $userId])->find();
+
                 M()->startTrans();
                 //把一周内该用户所有的收益都设置为已兑现
                 M('profit_log')->where([
@@ -77,10 +79,9 @@ class CashController extends CommonController
                 ]);
 
                 //保存日志
-                M('cash_log')->add([
+                M('business_log')->add([
                     'admin_id' => $this->_admin_id,
-                    'user_id'  => $userId,
-                    'count'    => $total,
+                    'content'  => "向用户 【${userInfo['name']}】 (id: ${userId}) 转账 ${total} RMB",
                     'cdate'    => date('Y-m-d H:i:s'),
                 ]);
 
@@ -135,9 +136,9 @@ class CashController extends CommonController
     }
 
     /**
-     * 打款日志
+     * 业务日志
      */
-    public function cashLog()
+    public function businessLog()
     {
         $this->checkLogin();
         $admin = M('admin')->select();
@@ -151,9 +152,8 @@ class CashController extends CommonController
             $userList[$value['user_id']] = $value['user_name'];
         }
 
-        $log = M('cash_log')->order('id desc')->select();
+        $log = M('business_log')->order('id desc')->select();
         foreach ($log as $k => $v) {
-            $log[$k]['user_name'] = $userList[$v['user_id']];
             $log[$k]['admin_name'] = $adminList[$v['admin_id']];
         }
 
